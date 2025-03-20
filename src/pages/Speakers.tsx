@@ -12,6 +12,8 @@ import {
   Button,
   TextField,
   InputAdornment,
+  Grid2 as Grid,
+  Stack,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -62,10 +64,15 @@ export const Speakers = () => {
   ];
 
   return (
-    <DashboardLayout title="speakers">
-      <Box sx={{ display: "flex", justifyContent: "space-between", mb: 4 }}>
+    <Grid container direction="column" spacing={3}>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        mb={4}
+      >
         <Typography variant="h4">Speakers</Typography>
-        <Box sx={{ display: "flex", gap: 2 }}>
+        <Stack direction="row" spacing={2}>
           <TextField
             size="small"
             placeholder="Search speakers"
@@ -80,10 +87,10 @@ export const Speakers = () => {
             }}
           />
           <Button variant="contained" startIcon={<PersonAddIcon />}>
-            Add Attendee
+            Add Speaker
           </Button>
-        </Box>
-      </Box>
+        </Stack>
+      </Stack>
 
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="speakers table">
@@ -96,34 +103,32 @@ export const Speakers = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {speakers.map((attendee) => (
+            {speakers.map((speaker) => (
               <TableRow
-                key={attendee.speaker_id}
+                key={speaker.speaker_id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {attendee.first_name} {attendee.last_name}
+                  {speaker.first_name} {speaker.last_name}
                 </TableCell>
-                <TableCell>{attendee.email}</TableCell>
-                <TableCell>{attendee.total_sessions}</TableCell>
+                <TableCell>{speaker.email}</TableCell>
+                <TableCell>{speaker.total_sessions}</TableCell>
                 <TableCell align="right">
-                  <Box
-                    sx={{ display: "flex", gap: 1, justifyContent: "flex-end" }}
-                  >
+                  <Stack direction="row" spacing={2} justifyContent="flex-end">
                     <Button size="small" variant="outlined">
                       View
                     </Button>
                     <Button size="small" variant="outlined" color="secondary">
                       Edit
                     </Button>
-                  </Box>
+                  </Stack>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-    </DashboardLayout>
+    </Grid>
   );
 };
 

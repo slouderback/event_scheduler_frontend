@@ -11,19 +11,24 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import Sidebar from "./Sidebar";
 import Breadcrumbs from "./Breadcrumbs";
+import { Outlet, useLocation } from "react-router";
 
-interface DashboardLayoutProps {
-  children: React.ReactNode;
-  title?: string;
-}
+const TitleMap = {
+  events: "Events",
+  speakers: "Speakers",
+  settings: "Settings",
+};
 
-export const DashboardLayout = ({
-  children,
-  title = "Dashboard",
-}: DashboardLayoutProps) => {
+export const DashboardLayout = () => {
   const theme = useTheme();
+  const location = useLocation();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const AppBarTitle = () => {
+    const path = location.pathname.split("/").pop();
+    return TitleMap[path as keyof typeof TitleMap] ?? "Dashboard";
+  };
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -71,7 +76,7 @@ export const DashboardLayout = ({
               </IconButton>
             )}
             <Typography variant="h6" noWrap component="div">
-              {title}
+              {AppBarTitle()}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -88,7 +93,7 @@ export const DashboardLayout = ({
             backgroundColor: "background.default",
           }}
         >
-          {children}
+          <Outlet />
         </Box>
       </Box>
     </Box>

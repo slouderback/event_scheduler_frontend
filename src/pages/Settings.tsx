@@ -11,7 +11,7 @@ import {
   Button,
   Switch,
   FormControlLabel,
-  Grid,
+  Grid2 as Grid,
 } from "@mui/material";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -46,7 +46,7 @@ export const Settings = () => {
   };
 
   return (
-    <DashboardLayout title="Settings">
+    <Grid container spacing={3}>
       <Typography variant="h4" gutterBottom>
         Settings
       </Typography>
@@ -71,7 +71,7 @@ export const Settings = () => {
             Profile Information
           </Typography>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
+            <Grid size={{ xs: 12, md: 6 }}>
               <TextField
                 fullWidth
                 label="Name"
@@ -79,7 +79,7 @@ export const Settings = () => {
                 margin="normal"
               />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid size={{ xs: 12, md: 6 }}>
               <TextField
                 fullWidth
                 label="Email"
@@ -87,7 +87,7 @@ export const Settings = () => {
                 margin="normal"
               />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid size={{ xs: 12, md: 6 }}>
               <TextField
                 fullWidth
                 label="Phone Number"
@@ -95,7 +95,7 @@ export const Settings = () => {
                 margin="normal"
               />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid size={{ xs: 12, md: 6 }}>
               <TextField
                 fullWidth
                 label="Organization"
@@ -103,7 +103,7 @@ export const Settings = () => {
                 margin="normal"
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={{ xs: 12 }}>
               <TextField
                 fullWidth
                 label="Bio"
@@ -113,7 +113,7 @@ export const Settings = () => {
                 margin="normal"
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={{ xs: 12 }}>
               <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
                 <Button variant="contained">Save Changes</Button>
               </Box>
@@ -131,7 +131,7 @@ export const Settings = () => {
               Change Password
             </Typography>
             <Grid container spacing={3}>
-              <Grid item xs={12} md={4}>
+              <Grid size={{ xs: 12, md: 4 }}>
                 <TextField
                   fullWidth
                   label="Current Password"
@@ -139,7 +139,7 @@ export const Settings = () => {
                   margin="normal"
                 />
               </Grid>
-              <Grid item xs={12} md={4}>
+              <Grid size={{ xs: 12, md: 4 }}>
                 <TextField
                   fullWidth
                   label="New Password"
@@ -147,7 +147,7 @@ export const Settings = () => {
                   margin="normal"
                 />
               </Grid>
-              <Grid item xs={12} md={4}>
+              <Grid size={{ xs: 12, md: 4 }}>
                 <TextField
                   fullWidth
                   label="Confirm New Password"
@@ -233,7 +233,7 @@ export const Settings = () => {
           </Box>
         </TabPanel>
       </Paper>
-    </DashboardLayout>
+    </Grid>
   );
 };
 

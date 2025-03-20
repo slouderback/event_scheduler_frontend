@@ -1,12 +1,13 @@
 import { useAuth } from "../contexts/AuthContext";
-import DashboardLayout from "../components/layout/DashboardLayout";
-import { Typography, Grid2 as Grid, Paper, Box } from "@mui/material";
+import { Typography, Grid2 as Grid, Paper, Box, Stack } from "@mui/material";
+import { useEvents } from "../hooks/useEvents";
 
 export const Dashboard = () => {
   const { user } = useAuth();
+  const { data: events, isLoading } = useEvents();
 
   return (
-    <DashboardLayout title="Dashboard">
+    <Grid container direction="column" spacing={3}>
       <Box sx={{ mb: 4 }}>
         <Typography variant="h4" gutterBottom>
           Welcome, {user?.name || "User"}
@@ -21,13 +22,10 @@ export const Dashboard = () => {
         <Grid>
           <Paper sx={{ p: 3, height: "100%" }}>
             <Typography variant="h6" gutterBottom>
-              Upcoming Events
+              Total Number of Events
             </Typography>
             <Typography variant="h3" component="div">
-              5
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Next event in 3 days
+              {isLoading ? "Loading..." : events?.length}
             </Typography>
           </Paper>
         </Grid>
@@ -43,6 +41,6 @@ export const Dashboard = () => {
           </Paper>
         </Grid>
       </Grid>
-    </DashboardLayout>
+    </Grid>
   );
 };

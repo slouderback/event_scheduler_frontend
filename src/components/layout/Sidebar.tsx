@@ -9,7 +9,7 @@ import {
   Box,
   Typography,
 } from "@mui/material";
-import { useNavigate, useLocation } from "react-router";
+import { useLocation, Link } from "react-router";
 
 // You'll need to install these icons or replace with your preferred icons
 // npm install @mui/icons-material
@@ -31,7 +31,6 @@ export const Sidebar = ({
   onClose,
   variant = "permanent",
 }: SidebarProps) => {
-  const navigate = useNavigate();
   const location = useLocation();
 
   const menuItems = [
@@ -65,8 +64,13 @@ export const Sidebar = ({
         {menuItems.map((item) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton
-              selected={location.pathname === item.path}
-              onClick={() => navigate(item.path)}
+              component={Link}
+              to={item.path}
+              selected={
+                item.path === "/"
+                  ? location.pathname === "/"
+                  : location.pathname.startsWith(item.path)
+              }
             >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
