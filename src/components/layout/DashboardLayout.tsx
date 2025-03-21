@@ -11,7 +11,8 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import Sidebar from "./Sidebar";
 import Breadcrumbs from "./Breadcrumbs";
-import { Outlet, useLocation } from "react-router";
+import { Navigate, Outlet, useLocation } from "react-router";
+import { useActiveEvent } from "../../contexts/EventContext";
 
 const TitleMap = {
   events: "Events",
@@ -24,6 +25,13 @@ export const DashboardLayout = () => {
   const location = useLocation();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const { event } = useActiveEvent();
+
+  if (!event) {
+    console.log("redirecting to", "/events");
+    return <Navigate to={"/events"} />;
+  }
 
   const AppBarTitle = () => {
     const path = location.pathname.split("/").pop();

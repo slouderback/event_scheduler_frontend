@@ -1,8 +1,6 @@
-import DashboardLayout from "../components/layout/DashboardLayout";
 import {
   Typography,
   Paper,
-  Box,
   Table,
   TableBody,
   TableCell,

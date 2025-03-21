@@ -6,15 +6,13 @@ import {
   ListItemIcon,
   ListItemText,
   Divider,
-  Box,
   Typography,
+  IconButton,
+  Stack,
 } from "@mui/material";
-import { useLocation, Link } from "react-router";
-
-// You'll need to install these icons or replace with your preferred icons
-// npm install @mui/icons-material
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useLocation, Link, useNavigate } from "react-router";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import EventIcon from "@mui/icons-material/Event";
 import PeopleIcon from "@mui/icons-material/People";
 import SettingsIcon from "@mui/icons-material/Settings";
 
@@ -32,10 +30,10 @@ export const Sidebar = ({
   variant = "permanent",
 }: SidebarProps) => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const menuItems = [
     { text: "Dashboard", icon: <DashboardIcon />, path: "/" },
-    { text: "Events", icon: <EventIcon />, path: "/events" },
     { text: "Speakers", icon: <PeopleIcon />, path: "/speakers" },
     { text: "Settings", icon: <SettingsIcon />, path: "/settings" },
   ];
@@ -54,11 +52,12 @@ export const Sidebar = ({
         },
       }}
     >
-      <Box sx={{ p: 2 }}>
-        <Typography variant="h6" component="div">
-          Event Scheduler
-        </Typography>
-      </Box>
+      <Link to="/events">
+        <Stack direction="row" alignItems="center" spacing={2} sx={{ p: 2 }}>
+          <ArrowBackIcon />
+          <Typography variant="h6">Back</Typography>
+        </Stack>
+      </Link>
       <Divider />
       <List>
         {menuItems.map((item) => (

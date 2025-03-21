@@ -1,4 +1,10 @@
-import { Typography, Stack, Paper, Skeleton } from "@mui/material";
+import {
+  Typography,
+  Stack,
+  Skeleton,
+  TableRow,
+  TableCell,
+} from "@mui/material";
 import { Speaker } from "./Speaker";
 import { DateTimeRange } from "./Dates/DateTimeRange";
 import { Session as SessionType } from "../../types";
@@ -14,33 +20,31 @@ export const Session = ({ session }: SessionProps) => {
   );
 
   return (
-    <Paper sx={{ p: 2 }}>
-      <Stack spacing={2}>
-        <Stack spacing={1}>
-          <Typography variant="h6">{session.name}</Typography>
-          <DateTimeRange
-            startDate={session.start_date}
-            endDate={session.end_date}
-          />
-        </Stack>
-
+    <TableRow key={session.session_id}>
+      <TableCell>
+        <Typography variant="subtitle1">{session.name}</Typography>
+      </TableCell>
+      <TableCell>
+        <DateTimeRange
+          startDate={session.start_date}
+          endDate={session.end_date}
+        />
+      </TableCell>
+      <TableCell>
         {speakersLoading ? (
           <Skeleton variant="rectangular" height={100} />
         ) : (
           speakers &&
           speakers.length > 0 && (
-            <Stack spacing={1}>
-              <Typography variant="subtitle1">Speakers:</Typography>
-              <Stack direction="row" spacing={1}>
-                {speakers.map((speaker) => (
-                  <Speaker key={speaker.speaker_id} speaker={speaker} />
-                ))}
-              </Stack>
+            <Stack direction="row" spacing={1}>
+              {speakers.map((speaker) => (
+                <Speaker key={speaker.speaker_id} speaker={speaker} />
+              ))}
             </Stack>
           )
         )}
-      </Stack>
-    </Paper>
+      </TableCell>
+    </TableRow>
   );
 };
 

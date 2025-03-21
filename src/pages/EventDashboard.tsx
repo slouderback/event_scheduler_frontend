@@ -1,12 +1,12 @@
-import { Stack, Alert, Skeleton } from "@mui/material";
-import { useParams } from "react-router";
+import { Stack, Alert, Skeleton, Typography } from "@mui/material";
 import { Track as TrackType } from "../../types";
-import { Track } from "./Track";
+import { Track } from "../components/Track";
 import { useEventTracks } from "../hooks/useEventTracks";
+import { useActiveEvent } from "../contexts/EventContext";
 
-export const EventDetails = () => {
-  const { eventId } = useParams();
-  const { data: tracks, isLoading, error } = useEventTracks(eventId);
+export const EventDashboard = () => {
+  const { event } = useActiveEvent();
+  const { data: tracks, isLoading, error } = useEventTracks(event?.event_id);
 
   if (error) {
     return (
@@ -37,6 +37,7 @@ export const EventDetails = () => {
 
   return (
     <Stack spacing={3}>
+      <Typography variant="h4">{event?.name}</Typography>
       {tracks.map((track: TrackType) => (
         <Track key={track.track_id} trackId={track.track_id} />
       ))}
@@ -44,4 +45,4 @@ export const EventDetails = () => {
   );
 };
 
-export default EventDetails;
+export default EventDashboard;

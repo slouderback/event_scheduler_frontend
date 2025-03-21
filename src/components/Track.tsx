@@ -1,4 +1,16 @@
-import { Typography, Stack, Paper, Skeleton, Alert } from "@mui/material";
+import {
+  Typography,
+  Stack,
+  Paper,
+  Skeleton,
+  Alert,
+  TableCell,
+  Table,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableBody,
+} from "@mui/material";
 import { useTrack } from "../hooks/useTrack";
 import { DateTimeRange } from "./Dates/DateTimeRange";
 import { useTrackSessions } from "../hooks/useTrackSessions";
@@ -27,38 +39,38 @@ export const Track = ({ trackId }: TrackProps) => {
         <Stack spacing={3}>
           <Stack spacing={1}>
             <Skeleton variant="text" width="60%" height={32} />
-            <Stack direction="row" spacing={1}>
-              <Stack spacing={0.5}>
-                <Stack direction="row" spacing={1}>
-                  <Skeleton variant="text" width={200} />
-                </Stack>
-                <Stack direction="row" spacing={1}>
-                  <Skeleton variant="text" width={100} />
-                </Stack>
-              </Stack>
-              <Skeleton variant="text" width={40} />
-              <Stack spacing={0.5}>
-                <Stack direction="row" spacing={1}>
-                  <Skeleton variant="text" width={200} />
-                </Stack>
-                <Stack direction="row" spacing={1}>
-                  <Skeleton variant="text" width={100} />
-                </Stack>
-              </Stack>
-            </Stack>
+            <DateTimeRange
+              startDate={new Date().toISOString()}
+              endDate={new Date().toISOString()}
+            />
           </Stack>
-          <Stack spacing={2}>
-            {[1, 2, 3].map((i) => (
-              <Paper key={i} sx={{ p: 2 }}>
-                <Stack spacing={2}>
-                  <Stack spacing={1}>
-                    <Skeleton variant="text" width="40%" height={28} />
-                    <Skeleton variant="text" width="30%" />
-                  </Stack>
-                </Stack>
-              </Paper>
-            ))}
-          </Stack>
+
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Session</TableCell>
+                  <TableCell>Date & Time</TableCell>
+                  <TableCell>Speakers</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {[1, 2, 3].map((i) => (
+                  <TableRow key={i}>
+                    <TableCell width="30%">
+                      <Skeleton variant="text" />
+                    </TableCell>
+                    <TableCell width="30%">
+                      <Skeleton variant="text" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton variant="text" />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </Stack>
       </Paper>
     );
@@ -74,15 +86,23 @@ export const Track = ({ trackId }: TrackProps) => {
             endDate={track.end_date}
           />
         </Stack>
-        {sessionsLoading ? (
-          <Skeleton variant="rectangular" height={100} />
-        ) : (
-          <Stack spacing={2}>
-            {sessions?.map((session, index) => (
-              <Session key={index} session={session} />
-            ))}
-          </Stack>
-        )}
+
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Session</TableCell>
+                <TableCell>Date & Time</TableCell>
+                <TableCell>Speakers</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {sessions?.map((session, index) => (
+                <Session key={index} session={session} />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Stack>
     </Paper>
   );

@@ -1,5 +1,5 @@
 export type Venue = {
-  venue_id: number;
+  venue_id: string;
   name: string;
   address: string;
   city: string;
@@ -9,12 +9,12 @@ export type Venue = {
 };
 
 export type Event = {
-  event_id: number;
-  venue_id: number;
+  event_id: string;
+  venue_id: string;
   name: string;
   start_date: string;
   end_date: string;
-  venue: Venue;
+  venue: Venue | null;
 };
 
 export type Track = {
