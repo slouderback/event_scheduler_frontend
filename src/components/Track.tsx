@@ -22,8 +22,7 @@ type TrackProps = {
 
 export const Track = ({ trackId }: TrackProps) => {
   const { data: track, isLoading, error } = useTrack(trackId);
-  const { data: sessions, isLoading: sessionsLoading } =
-    useTrackSessions(trackId);
+  const { data: sessions } = useTrackSessions(trackId);
 
   if (error) {
     return (
